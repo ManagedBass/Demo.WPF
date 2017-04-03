@@ -1,0 +1,107 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:CDTest"
+        Title="CD Test"
+        Height="480" 
+        Width="650">
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Key="F5"
+                    Command="{Binding RefreshCommand}"/>
+    </Window.InputBindings>
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Top">
+            <Button Content="Refresh"
+                    DockPanel.Dock="Right"
+                    Command="{Binding RefreshCommand}"
+                    Padding="5,0"/>
+            <ListBox ItemsSource="{Binding AvailableDrives}"
+                     SelectedItem="{Binding SelectedDrive, Mode=TwoWay}"
+                     SelectedIndex="0"
+                     DisplayMemberPath="Name"
+                     Height="90"/>
+        </DockPanel>
+
+        <DockPanel DockPanel.Dock="Bottom">
+            <Button Content="Play" 
+                    Command="{Binding PlayCommand}"
+                    Width="50" 
+                    Height="90"/>
+            <ListBox ItemsSource="{Binding CDAFiles}"
+                     SelectedItem="{Binding SelectedCDA, Mode=TwoWay}"
+                     SelectedIndex="0"
+                     DockPanel.Dock="Bottom"
+                     Height="90"/>
+        </DockPanel>
+
+        <StackPanel DataContext="{Binding SelectedDrive}"
+                    Margin="0,5"
+                    DockPanel.Dock="Top">
+            <StackPanel Orientation="Horizontal">
+                <CheckBox Content="Can Open"
+                          IsEnabled="False"
+                          Margin="5"
+                          IsChecked="{Binding CanOpen, Mode=OneWay}"/>
+                <CheckBox Content="Can Lock"
+                          IsEnabled="False"
+                          Margin="5"
+                          IsChecked="{Binding CanLock, Mode=OneWay}"/>
+                <CheckBox Content="CD Text"
+                          IsEnabled="False"
+                          Margin="5"
+                          IsChecked="{Binding CDText, Mode=OneWay}"/>
+            </StackPanel>
+            <DockPanel Margin="0,0,0,5">
+                <Label Content="Manufactuer:"/>
+                <TextBox IsReadOnly="True"
+                         Text="{Binding Manufacturer, Mode=OneWay}"
+                         Height="20"/>
+            </DockPanel>
+            <DockPanel Margin="0,0,0,5">
+                <Label Content="Revision:"/>
+                <TextBox IsReadOnly="True"
+                         Text="{Binding Revision, Mode=OneWay}"
+                         Height="20"/>
+            </DockPanel>
+            <DockPanel Margin="0,0,0,5">
+                <Label Content="RWFlags:"/>
+                <TextBox IsReadOnly="True"
+                         Text="{Binding ReadWriteFlags, Mode=OneWay}"
+                         Height="20"/>
+            </DockPanel>
+
+            <StackPanel Orientation="Horizontal">
+                <DockPanel Margin="5">
+                    <Label Content="Max Speed:"/>
+                    <TextBox IsReadOnly="True"
+                             Text="{Binding MaxSpeed, Mode=OneWay}"
+                             Height="20"
+                             Padding="5,0"/>
+                </DockPanel>
+                <DockPanel Margin="5">
+                    <Label Content="Speed Multiplier:"/>
+                    <TextBox IsReadOnly="True"
+                             Text="{Binding SpeedMultiplier, Mode=OneWay}"
+                             Height="20"
+                             Padding="5,0"/>
+                </DockPanel>
+                <DockPanel Margin="5">
+                    <Label Content="Drive Letter:"/>
+                    <TextBox IsReadOnly="True"
+                             Text="{Binding DriveLetter, Mode=OneWay}"
+                             Height="20"
+                             Padding="5,0"/>
+                </DockPanel>
+                <DockPanel Margin="5">
+                    <Label Content="Cache:"/>
+                    <TextBox IsReadOnly="True"
+                             Text="{Binding Cache, Mode=OneWay}"
+                             Height="20"
+                             Padding="5,0"/>
+                </DockPanel>
+            </StackPanel>
+        </StackPanel>
+    </DockPanel>
+</Window>

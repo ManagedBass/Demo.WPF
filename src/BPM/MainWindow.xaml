@@ -1,0 +1,69 @@
+﻿<Window x:Class="BPM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:BPM"
+        Title="BPM"
+        Height="350"
+        Width="525">
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
+    <DockPanel Margin="5"
+               LastChildFill="False">
+        <DockPanel DockPanel.Dock="Bottom"
+                   Margin="0,5">
+            <TextBlock>Detecting Progress of a Decoding BPM:</TextBlock>
+            <ProgressBar Value="{Binding BpmProgress}"
+                         Margin="5,0,0,0"/>
+        </DockPanel>
+        
+        <Button Content="{Binding Status}"
+                Command="{Binding OpenCommand}"
+                DockPanel.Dock="Top"
+                Margin="0,5,0,15"/>
+        
+        <DockPanel DockPanel.Dock="Top">
+            <TextBlock>Tempo</TextBlock>
+            <Slider Value="{Binding Tempo, Mode=TwoWay}"
+                    Minimum="-30"
+                    Maximum="30"
+                    Margin="5,0,0,0">
+                <Slider.ToolTip>
+                    <TextBlock Text="{Binding Tempo, StringFormat='{}{0:F2} %'}"/>
+                </Slider.ToolTip>
+            </Slider>
+        </DockPanel>
+        
+        <DockPanel DockPanel.Dock="Top"
+                   Margin="0,5">
+            <TextBlock>Sample Rate</TextBlock>
+            <Slider Value="{Binding SampleRate, Mode=TwoWay}"
+                    Minimum="{Binding MinSampleRate}"
+                    Maximum="{Binding MaxSampleRate}"
+                    Margin="5,0,0,0">
+                <Slider.ToolTip>
+                    <TextBlock Text="{Binding SampleRate, StringFormat='{}{0:F2} Hz'}"/>
+                </Slider.ToolTip>
+            </Slider>
+        </DockPanel>
+        
+        <TextBlock Text="{Binding Bpm, StringFormat='{}BPM: {0:F2}'}"
+                   DockPanel.Dock="Top"
+                   Margin="0,10"/>
+        
+        <DockPanel DockPanel.Dock="Top"
+                   Margin="0,5">
+            <CheckBox Content="BPM by Period of Seconds"
+                      IsChecked="{Binding IsBpmPeriod, Mode=TwoWay}"/>
+            <TextBox Text="{Binding BpmPeriod, Mode=TwoWay}"
+                     HorizontalContentAlignment="Right"
+                     Margin="5,0,0,0"/>
+        </DockPanel>
+
+        <DockPanel DockPanel.Dock="Top">
+            <CheckBox Content="Beat Position = "
+                      IsChecked="{Binding IsBeatPosition, Mode=TwoWay}"/>
+            <TextBlock Text="{Binding BeatPosition, StringFormat={}{0:F2}}"/>
+        </DockPanel>
+    </DockPanel>
+</Window>

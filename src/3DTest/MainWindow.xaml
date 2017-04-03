@@ -1,0 +1,94 @@
+﻿<Window x:Class="Test3D.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Test3D"
+        Title="3D Test"
+        Height="350"
+        Width="525">
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Key="O"
+                    Modifiers="Control"
+                    Command="{Binding OpenCommand}"/>
+        <KeyBinding Key="Delete"
+                    Command="{Binding RemoveCommand}"/>
+    </Window.InputBindings>
+    <DockPanel Margin="5">
+        <StackPanel Orientation="Horizontal"
+                    DockPanel.Dock="Bottom"
+                    Margin="0,3,0,0">
+            <StackPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Width"
+                            Value="70"/>
+                </Style>
+            </StackPanel.Resources>
+            <Button Content="Play"
+                    Command="{Binding PlayCommand}"/>
+            <Button Content="Pause"
+                    Command="{Binding PauseCommand}"
+                    Margin="0,0,3,0"/>
+            <Button Content="Add"
+                    Command="{Binding OpenCommand}"/>
+            <Button Content="Remove"
+                    Command="{Binding RemoveCommand}"/>
+            <Button Content="Reset"
+                    Command="{Binding ResetCommand}"
+                    Margin="3,0"/>
+        </StackPanel>
+        
+        <DockPanel DockPanel.Dock="Right"
+                   LastChildFill="False">
+            <Canvas Width="200"
+                    Height="200"
+                    DockPanel.Dock="Top">
+                <Border BorderThickness="0.3"
+                        BorderBrush="Black"
+                        Height="200"
+                        Width="200"/>
+
+                <Ellipse Height="5"
+                         Width="5"
+                         Canvas.Left="{Binding BallPosition.X}"
+                         Canvas.Top="{Binding BallPosition.Y}"
+                         Fill="DarkRed"/>
+            </Canvas>
+
+            <DockPanel DockPanel.Dock="Bottom">
+                <Label Content="Z-Velocity"/>
+                <TextBox Text="{Binding ZVelocity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         IsEnabled="{Binding Channels.Count}"/>
+            </DockPanel>
+
+            <DockPanel DockPanel.Dock="Bottom"
+                       Margin="0,3">
+                <Label Content="X-Velocity"/>
+                <TextBox Text="{Binding XVelocity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         IsEnabled="{Binding Channels.Count}"/>
+            </DockPanel>
+        </DockPanel>
+        
+        <DockPanel>
+            <DockPanel DockPanel.Dock="Bottom">
+                <Label Content="Roll-Off"/>
+                <Slider Minimum="0"
+                        Maximum="10"
+                        Value="{Binding RollOff, Mode=TwoWay}"/>
+            </DockPanel>
+
+            <DockPanel DockPanel.Dock="Bottom"
+                       Margin="0,2">
+                <Label Content="Doppler"/>
+                <Slider Minimum="0"
+                        Maximum="10"
+                        Value="{Binding Doppler, Mode=TwoWay}"/>
+            </DockPanel>
+
+            <ListBox ItemsSource="{Binding Channels}"
+                     SelectedItem="{Binding CurrentChannel, Mode=TwoWay}"
+                     Margin="0,0,3,3"/>
+        </DockPanel>
+    </DockPanel>
+</Window>

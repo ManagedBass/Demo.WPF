@@ -1,0 +1,25 @@
+﻿<Window x:Class="PluginTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:PluginTest"
+        Title="Plugin Test"
+        Height="350"
+        Width="525">
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Key="O"
+                    Modifiers="Control"
+                    Command="{Binding OpenCommand}"/>
+    </Window.InputBindings>
+    <DockPanel Margin="5">
+        <Button Content="{Binding Status}"
+                DockPanel.Dock="Top"
+                Command="{Binding OpenCommand}"/>
+        <GroupBox Header="Loaded Plugins"
+                  Margin="0,5">
+            <ListView ItemsSource="{Binding PluginCollection}"/>
+        </GroupBox>
+    </DockPanel>
+</Window>

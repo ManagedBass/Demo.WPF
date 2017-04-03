@@ -1,0 +1,13 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        Title="Device Enumerator"
+        Height="400"
+        Width="550">
+    <TabControl>
+        <TabItem Header="Bass Devices">
+            <Frame Source="Views/BassDeviceEnumerator.xaml"/>
+        </TabItem>
+        <TabItem Header="Wasapi Devices">
+            <Frame Source="Views/WasapiDeviceEnumerator.xaml"/>
+        </TabItem>
+    </TabControl>
+</Window>

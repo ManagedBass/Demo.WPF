@@ -1,0 +1,36 @@
+﻿<Window x:Class="PitchTracking.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:PitchTracking"
+        Title="Pitch Tracker"
+        Height="350"
+        Width="525">
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <local:DetectButtonContentConverter x:Key="DetectButtonContentConverter"/>
+    </Window.Resources>
+    <DockPanel>
+        <Label Content="Adapted from pitchtracker.codeplex.com"
+               DockPanel.Dock="Bottom"/>
+        <StackPanel DockPanel.Dock="Top">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Frequency"/>
+                <Label Content="{Binding Frequency}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Note"
+                       Margin="0,0,28,0"/>
+                <Label Content="{Binding Note}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Cents"
+                       Margin="0,0,24,0"/>
+                <Label Content="{Binding Cents}"/>
+            </StackPanel>
+        </StackPanel>
+        <Button Content="{Binding IsRecording, Converter={StaticResource DetectButtonContentConverter}}"
+                Command="{Binding DetectCommand}"/>
+    </DockPanel>
+</Window>

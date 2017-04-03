@@ -1,0 +1,151 @@
+﻿<Window x:Class="MidiSynth.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:MidiSynth"
+        Title="MidiSynth"
+        Height="440"
+        Width="525">
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Key="O"
+                    Modifiers="Control"
+                    Command="{Binding OpenCommand}"/>
+        <KeyBinding Key="Add"
+                    Modifiers="Control"
+                    Command="{Binding IncreaseBufferLengthCommand}"/>
+        <KeyBinding Key="Subtract"
+                    Modifiers="Control"
+                    Command="{Binding DecreaseBufferLengthCommand}"/>
+    </Window.InputBindings>
+    <DockPanel Margin="5">
+        <DockPanel.Resources>
+            <Style TargetType="GroupBox">
+                <Setter Property="Padding" Value="5"/>
+            </Style>
+        </DockPanel.Resources>
+        <GroupBox Header="Midi Input Devices"
+                  DockPanel.Dock="Top">
+            <DockPanel>
+                <ComboBox ItemsSource="{Binding Devices}"
+                          IsEnabled="{Binding Devices.Count}"
+                          SelectedValuePath="Key"
+                          DisplayMemberPath="Value"
+                          SelectedValue="{Binding Device, Mode=TwoWay}"
+                          DockPanel.Dock="Top"
+                          Margin="0,5"/>
+                <DockPanel LastChildFill="False">
+                    <Button Content="Reset"
+                            Command="{Binding ResetCommand}"
+                            DockPanel.Dock="Right"
+                            Width="70"/>
+                    <Ellipse DockPanel.Dock="Right"
+                             Fill="#9FFF0000"
+                             Width="10"
+                             Height="10"
+                             Visibility="{Binding Activity}"
+                             Margin="7,0"/>
+                    <RadioButton Content="1 Channel"
+                                 IsEnabled="{Binding Devices.Count}"
+                                 GroupName="ChannelCount"
+                                 VerticalAlignment="Center"
+                                 IsChecked="True"/>
+                    <RadioButton Content="16 Channels"
+                                 GroupName="ChannelCount"
+                                 VerticalAlignment="Center"
+                                 IsEnabled="{Binding Devices.Count}"
+                                 IsChecked="{Binding Channels16, Mode=TwoWay}"
+                                 Margin="5,0"/>
+                </DockPanel>
+            </DockPanel>
+        </GroupBox>
+
+        <GroupBox Header="Output"
+                  DockPanel.Dock="Bottom">
+            <DockPanel>
+                <CheckBox DockPanel.Dock="Top"
+                          Content="Sinc Interpolation"
+                          IsChecked="{Binding SincInterpolation, Mode=TwoWay}"/>
+                <DockPanel DockPanel.Dock="Bottom">
+                    <DockPanel DockPanel.Dock="Right">
+                        <Button Content="+"
+                                Width="20"
+                                Command="{Binding IncreaseBufferLengthCommand}"
+                                Margin="5,0"/>
+                        <Button Content="-"
+                                Width="20"
+                                Command="{Binding DecreaseBufferLengthCommand}"/>
+                    </DockPanel>
+                    <TextBlock Margin="7,0"
+                               VerticalAlignment="Center">
+                        BufferLength: <TextBlock Text="{Binding BufferLength}"/>ms
+                    </TextBlock>
+                </DockPanel>
+                <StackPanel Orientation="Horizontal"
+                            Margin="0,5">
+                    <StackPanel.Resources>
+                        <Style TargetType="CheckBox">
+                            <Setter Property="Margin" Value="7,0,0,0"/>
+                        </Style>
+                    </StackPanel.Resources>
+                    <Label Content="Effects:"/>
+                    <CheckBox Content="Reverb"
+                              IsChecked="{Binding Reverb, Mode=TwoWay}"
+                              VerticalAlignment="Center"/>
+                    <CheckBox Content="Echo"
+                              IsChecked="{Binding Echo, Mode=TwoWay}"
+                              VerticalAlignment="Center"/>
+                    <CheckBox Content="Chorus"
+                              IsChecked="{Binding Chorus, Mode=TwoWay}"
+                              VerticalAlignment="Center"/>
+                    <CheckBox Content="Flanger"
+                              IsChecked="{Binding Flanger, Mode=TwoWay}"
+                              VerticalAlignment="Center"/>
+                    <CheckBox Content="Distortion"
+                              IsChecked="{Binding Distortion, Mode=TwoWay}"
+                              VerticalAlignment="Center"/>
+                </StackPanel>
+            </DockPanel>
+        </GroupBox>
+        
+        <GroupBox Header="Soundfont"
+                  DockPanel.Dock="Top">
+            <DockPanel>
+                <Button DockPanel.Dock="Top"
+                        Content="{Binding SoundFont}"
+                        Command="{Binding OpenCommand}"
+                        Margin="0,5"/>
+                <DockPanel>
+                    <Label Content="Preset:"/>
+                    <CheckBox Content="Drums"
+                              VerticalAlignment="Center"
+                              IsChecked="{Binding Drums, Mode=TwoWay}"
+                              IsEnabled="{Binding MultiPresets}"
+                              DockPanel.Dock="Right"/>
+                    <ComboBox ItemsSource="{Binding Presets}"
+                              SelectedValuePath="Key"
+                              DisplayMemberPath="Value"
+                              IsEnabled="{Binding MultiPresets}"
+                              SelectedValue="{Binding Preset, Mode=TwoWay}"
+                              Margin="5,0"/>
+                </DockPanel>
+            </DockPanel>
+        </GroupBox>
+
+        <GroupBox Header="Keyboard Input"
+                  DockPanel.Dock="Top">
+            <DockPanel>
+                <CheckBox DockPanel.Dock="Bottom"
+                          Content="Repeat"
+                          IsChecked="{Binding Repeat, Mode=TwoWay}"/>
+                <StackPanel>
+                    <TextBlock Text="  2 3  5 6 7  9 0  ="
+                               HorizontalAlignment="Center"/>
+                    <TextBlock Text="Q W ER T Y UI O P[ ]"
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
+            </DockPanel>
+        </GroupBox>
+    </DockPanel>
+</Window>

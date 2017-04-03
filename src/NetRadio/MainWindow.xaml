@@ -1,0 +1,102 @@
+﻿<Window x:Class="NetRadio.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:NetRadio"
+        Title="NetRadio"
+        Height="380"
+        Width="550">
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
+    <DockPanel Margin="5">
+        <DockPanel.Resources>
+            <Style TargetType="GroupBox">
+                <Setter Property="Margin"
+                        Value="0,3"/>
+                <Setter Property="Padding"
+                        Value="0,1"/>
+            </Style>
+        </DockPanel.Resources>
+        
+        <Label DockPanel.Dock="Bottom"
+               Content="{Binding Status}"/>
+        
+        <GroupBox Header="Proxy Server"
+                  DockPanel.Dock="Bottom">
+            <DockPanel>
+                <TextBox Text="{Binding Proxy, Mode=TwoWay}"
+                         DockPanel.Dock="Top"
+                         Margin="0,5"/>
+                <TextBlock DockPanel.Dock="Right">[user:pass@]server:port</TextBlock>
+                <CheckBox Content="Direct Connection"
+                          IsChecked="{Binding DirectConnection, Mode=TwoWay}"/>
+            </DockPanel>
+        </GroupBox>
+
+        <GroupBox Header="Now Playing"
+                  DockPanel.Dock="Bottom">
+            <StackPanel>
+                <Label Content="{Binding TitleAndArtist}"/>
+                <Label Content="{Binding IcyMeta}"/>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Custom"
+                  DockPanel.Dock="Bottom">
+            <DockPanel>
+                <Button Content="Open"
+                        Command="{Binding OpenCommand}"
+                        CommandParameter="{Binding Text, ElementName=CustomUrl}"
+                        DockPanel.Dock="Right"
+                        Width="60"/>
+                <TextBox Text="http://"
+                         Name="CustomUrl"/>
+            </DockPanel>
+        </GroupBox>
+
+        <GroupBox Header="Presets">
+            <StackPanel>
+                <StackPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="Width" Value="20"/>
+                        <Setter Property="Margin" Value="5"/>
+                        <Setter Property="Command" Value="{Binding OpenCommand}"/>
+                    </Style>
+                </StackPanel.Resources>
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Right">
+                        <Button Content="1"
+                                CommandParameter="{Binding Presets[0]}"/>
+                        <Button Content="2"
+                                CommandParameter="{Binding Presets[1]}"/>
+                        <Button Content="3"
+                                CommandParameter="{Binding Presets[2]}"/>
+                        <Button Content="4"
+                                CommandParameter="{Binding Presets[3]}"/>
+                        <Button Content="5"
+                                CommandParameter="{Binding Presets[4]}"/>
+                    </StackPanel>
+                    <TextBlock>High Quality</TextBlock>
+                </DockPanel>
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal"
+                                DockPanel.Dock="Right">
+                        <Button Content="1"
+                                CommandParameter="{Binding Presets[5]}"/>
+                        <Button Content="2"
+                                CommandParameter="{Binding Presets[6]}"/>
+                        <Button Content="3"
+                                CommandParameter="{Binding Presets[7]}"/>
+                        <Button Content="4"
+                                CommandParameter="{Binding Presets[8]}"/>
+                        <Button Content="5"
+                                CommandParameter="{Binding Presets[9]}"/>
+                    </StackPanel>
+                    <TextBlock>Low Quality</TextBlock>
+                </DockPanel>
+            </StackPanel>
+        </GroupBox>
+    </DockPanel>
+</Window>
