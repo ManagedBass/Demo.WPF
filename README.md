@@ -48,6 +48,11 @@ Requires: bass.dll
 ## RecordingTest
 Requires: bass.dll
 
+## Revic
+Demonstrates usage of MediaPlayer API.
+
+Requires: bass.dll and bass_fx.dll
+
 ## Sythesizer
 Ported from BASS Sample: synth
 

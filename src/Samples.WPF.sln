@@ -27,11 +27,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synthesizer", "Synthesizer\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecordingTest", "RecordingTest\RecordingTest.csproj", "{87FC0E1E-9928-4BCC-89DC-B8F9D0B0FDF7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Revic", "Revic\Revic.csproj", "{5A055A24-A34F-47DF-ACFA-46FB0CBD24CF}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Common\Common.projitems*{0e1af644-5a7d-45ea-a11a-ab5e978b3a23}*SharedItemsImports = 4
 		Common\Common.projitems*{42718869-c1bc-4208-936d-dc3639805adb}*SharedItemsImports = 4
 		Common\Common.projitems*{4c7ef771-2948-4322-a1b6-d930cf89e120}*SharedItemsImports = 4
+		Common\Common.projitems*{5a055a24-a34f-47df-acfa-46fb0cbd24cf}*SharedItemsImports = 4
 		Common\Common.projitems*{6de54905-9ad2-439b-8440-b73ab214a26e}*SharedItemsImports = 4
 		Common\Common.projitems*{8339a974-dc4b-4417-afb3-e758a67f0781}*SharedItemsImports = 13
 		Common\Common.projitems*{87fc0e1e-9928-4bcc-89dc-b8f9d0b0fdf7}*SharedItemsImports = 4
@@ -91,6 +94,10 @@ Global
 		{87FC0E1E-9928-4BCC-89DC-B8F9D0B0FDF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87FC0E1E-9928-4BCC-89DC-B8F9D0B0FDF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87FC0E1E-9928-4BCC-89DC-B8F9D0B0FDF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A055A24-A34F-47DF-ACFA-46FB0CBD24CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A055A24-A34F-47DF-ACFA-46FB0CBD24CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A055A24-A34F-47DF-ACFA-46FB0CBD24CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A055A24-A34F-47DF-ACFA-46FB0CBD24CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
