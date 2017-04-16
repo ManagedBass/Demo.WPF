@@ -1,4 +1,7 @@
 # ManagedBass WPF Samples
+ManagedBass samples for WPF (Windows Presentation Framework).
+
+Download the required libraries from http://un4seen.com and place in build output directory.
 
 ## 3DTest
 Ported from BASS Sample: 3dtest
@@ -40,6 +43,9 @@ Requires: bass.dll
 ## PluginTest
 Ported from BASS Sxample: plugin
 
+Requires: bass.dll
+
+## RecordingTest
 Requires: bass.dll
 
 ## Sythesizer

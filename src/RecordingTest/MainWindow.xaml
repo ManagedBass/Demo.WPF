@@ -1,0 +1,72 @@
+﻿<Window x:Class="RecordingTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:RecordingTest"
+        Title="Recording Test"
+        Width="500"
+        Height="300">
+    <Window.Resources>
+        <local:StateToPlayButtonConverter x:Key="StateToPlayButtonConverter"/>
+        <local:StateToStatusConverter x:Key="StateToStatusConverter"/>
+    </Window.Resources>
+    <Window.DataContext>
+        <local:MainViewModel/>
+    </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Key="F5"
+                    Command="{Binding RefreshCommand}"/>
+        <KeyBinding Key="O"
+                    Modifiers="Control"
+                    Command="{Binding OpenOutputFolderCommand}"/>
+    </Window.InputBindings>
+    <DockPanel LastChildFill="False">
+        <DockPanel.Resources>
+            <Style TargetType="Button"
+                   BasedOn="{StaticResource {x:Type Button}}">
+                <Setter Property="Background"
+                        Value="Transparent"/>
+                <Setter Property="BorderThickness"
+                        Value="0.5"/>
+            </Style>
+            
+            <Style TargetType="TabItem"
+                   BasedOn="{StaticResource {x:Type TabItem}}">
+                <Setter Property="Background"
+                        Value="Transparent"/>
+            </Style>
+        </DockPanel.Resources>
+
+        <Label Content="{Binding State, Converter={StaticResource StateToStatusConverter}}"
+               DockPanel.Dock="Bottom"/>
+
+        <DockPanel DockPanel.Dock="Top"
+                   Margin="0,5">
+            <Button Content="Refresh"
+                    DockPanel.Dock="Right"
+                    Command="{Binding RefreshCommand}"
+                    Padding="5"/>
+            <ComboBox ItemsSource="{Binding AvailableAudioSources}"
+                      SelectedItem="{Binding SelectedAudioDevice, Mode=TwoWay}"
+                      SelectedIndex="0"/>
+        </DockPanel>
+
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    DockPanel.Dock="Top">
+            <Button Content="{Binding State, Converter={StaticResource StateToPlayButtonConverter}}"
+                    Command="{Binding PlayPauseCommand}"
+                    Padding="5"
+                    Margin="3"/>
+            <Button Content="Stop" 
+                    Command="{Binding StopCommand}"
+                    Padding="5"
+                    Margin="3"/>
+        </StackPanel>
+
+        <Button DockPanel.Dock="Bottom"
+                Content="Open Output Folder"
+                Command="{Binding OpenOutputFolderCommand}"
+                Margin="0,5"
+                Padding="0,5"/>
+    </DockPanel>
+</Window>
